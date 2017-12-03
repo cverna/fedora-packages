@@ -1,0 +1,18 @@
+FROM registry.fedoraproject.org/fedora:27
+
+RUN dnf install -y 'dnf-command(config-manager)'\
+    &&dnf config-manager --set-enabled updates-testing\
+    &&dnf install -y python-psycopg2 python-memcached httpd dumb-init tmux vim\
+    fedmsg python-kitchen python-fedora python-bugzilla koji xapian-bindings-python\
+    fedpkg python-webob moksha TurboGears2 python-dogpile-cache python-dogpile-core\
+    python-markdown pygobject3 mod_wsgi python2-webhelpers\
+    && mkdir -p /etc/fedoracommunity /var/cache/fedoracommunity /var/tmp/fedoracommunity\
+    /var/log/fedoracommunity
+
+EXPOSE 80
+ENTRYPOINT ["dumb-init", "/usr/share/fedoracommunity/devel/docker/docker-entrypoint.sh"]
+
+ADD xapian.tgz /var/tmp/fedoracommunity/
+ADD icons.tgz /var/cache/fedoracommunity/packages/
+ADD packages-httpd.conf /etc/httpd/conf.d/
+ADD production.ini /etc/fedoracommunity/

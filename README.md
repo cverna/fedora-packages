@@ -5,9 +5,25 @@ fedora-packages allows to search for packages in Fedora.
 ## Documentation
 Would be nice to have a bit more documentation.
 
+### Hacking with docker-compose
+
+We have a docker-compose environment that run fedora-packages using Apache HTTP server.
+That way we develop against a replicate of the production environment.
+
+To get started install docker-compose:
+
+	$ sudo dnf install docker-compose
+
+Once installed, from the main directory simply run the following commands:
+
+	$ docker-compose -f devel/docker-compose.yml build
+	$ docker-compose -f devel/docker-compose.yml up
+
+Once the container built and started, you can access the applications at http://127.0.0.1:8080/packages
+
 ### Hacking with Vagrant
 
-We have a simple vagrant setup for hacking on the fedora-packages app.
+We also have a simple vagrant setup for hacking on the fedora-packages app.
 
 First, install Ansible, Vagrant, the vagrant-sshfs plugin, and the
 vagrant-libvirt plugin from the official Fedora repos:
