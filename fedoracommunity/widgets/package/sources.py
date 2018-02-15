@@ -70,5 +70,5 @@ class Sources(twc.Widget):
         else:
             main_package = self.package_name
         spec = SpecConnector(main_package, self.branch)
-        self.text = highlight(spec.get_text(), RpmSpecLexer(),
+        self.text = highlight(spec.get_spec(), RpmSpecLexer(),
                               HtmlFormatter(full=True, linenos=True, nobackground=True))

@@ -22,8 +22,9 @@ This Connector returns a package spec file using src.fp.o as a source
 
 """
 import logging
+
 import requests
-from fedoracommunity.connectors.api import IConnector, ICall, IQuery
+from tg import config
 
 log = logging.getLogger(__name__)
 
@@ -35,10 +36,13 @@ class SpecConnector(object):
     def __init__(self, package, branch='master'):
         self.pkg = package
         self.branch = branch
+        self.baseurl = config.get(
+            'fedoracommunity.connector.spec.baseurl',
+            'https://src.fedoraproject.org')
 
-    def get_text(self):
+    def get_spec(self):
         resp = requests.get(
-            'https://src.fedoraproject.org/rpms/{pkg}/raw/{branch}/f/{pkg}.spec'
-            .format(pkg=self.pkg, branch=self.branch))
+            '{url}/rpms/{pkg}/raw/{branch}/f/{pkg}.spec'
+            .format(url=self.baseurl, pkg=self.pkg, branch=self.branch))
         if resp.ok:
             return resp.text
