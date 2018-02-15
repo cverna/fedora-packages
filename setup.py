@@ -129,9 +129,7 @@ setup(
     package_contents = fedoracommunity.widgets.package.contents:ContentsWidget
     package_changelog = fedoracommunity.widgets.package.changelog:ChangelogWidget
     package_sources = fedoracommunity.widgets.package.sources:Sources
-    package_sources_spec = fedoracommunity.widgets.package.sources:Spec
-    package_sources_patches = fedoracommunity.widgets.package.sources:Patches
-    package_sources_patch = fedoracommunity.widgets.package.sources:Patch
+
 
     [moksha.consumer]
     cache_invalidator = fedoracommunity.consumers:CacheInvalidator
